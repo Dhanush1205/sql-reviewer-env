@@ -1,0 +1,15 @@
+[project]
+name = "sql-reviewer-env"
+version = "0.1.0"
+description = "SQL Reviewer API using LLM"
+requires-python = ">=3.9"
+
+dependencies = [
+    "flask",
+    "requests",
+    "python-dotenv"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
