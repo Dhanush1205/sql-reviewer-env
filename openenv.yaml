@@ -1,0 +1,63 @@
+name: sql-reviewer-env
+version: "1.0.0"
+description: >
+  An OpenEnv environment where an AI agent reviews SQL queries submitted by
+  junior developers, detecting syntax errors, security vulnerabilities (SQL
+  injection), and performance anti-patterns.
+
+author: MetaAgents
+tags:
+  - sql
+  - code-review
+  - security
+  - real-world
+  - openenv
+
+tasks:
+  - id: syntax_fix
+    difficulty: easy
+    description: Fix syntax errors in a malformed SELECT query
+    max_steps: 5
+    reward_range: [0.0, 1.0]
+
+  - id: sql_injection
+    difficulty: medium
+    description: Detect and fix a SQL injection vulnerability using parameterized queries
+    max_steps: 5
+    reward_range: [0.0, 1.0]
+
+  - id: query_optimization
+    difficulty: hard
+    description: Optimize a slow production query — eliminate N+1, add aggregation, fix date filters
+    max_steps: 5
+    reward_range: [0.0, 1.0]
+
+action_space:
+  type: structured
+  fields:
+    review_comment: str
+    fixed_query: str
+    issues_found: list[str]
+    severity: "low | medium | high | critical"
+
+observation_space:
+  type: structured
+  fields:
+    task_id: str
+    task_description: str
+    sql_query: str
+    schema_context: str
+    step_number: int
+    previous_feedback: Optional[str]
+    hints: list[str]
+
+reward:
+  type: float
+  range: [0.0, 1.0]
+  shaped: true
+  description: >
+    Composite score across correctness, vulnerability detection,
+    code quality, and explanation quality. Partial credit awarded
+    at each step to provide dense reward signal.
+
+entry_point: app:app
