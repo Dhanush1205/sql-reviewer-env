@@ -49,7 +49,7 @@ def list_tasks():
     return {tid: {"difficulty": t["difficulty"], "description": t["description"]} for tid, t in TASKS.items()}
 
 def main():
-    uvicorn.run("server.app:app", host="0.0.0.0", port=int(os.getenv("PORT", 7860)))
+    uvicorn.run("app:app", host="0.0.0.0", port=int(os.getenv("PORT", 7860)))
 
 if __name__ == "__main__":
     main()
