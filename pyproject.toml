@@ -3,16 +3,16 @@ name = "sql-reviewer-env"
 version = "0.1.0"
 description = "SQL Reviewer API using LLM"
 requires-python = ">=3.9"
-
 dependencies = [
-    "flask",
+    "fastapi",
+    "uvicorn",
     "requests",
     "python-dotenv",
     "openenv-core>=0.2.0"
 ]
 
 [project.scripts]
-start = "server.app:app"
+start = "server.app:main"
 
 [build-system]
 requires = ["setuptools"]
